@@ -88,16 +88,9 @@
                         <td>{{ $product->capacity }}</td>
                         <td>{{ $product->network }}</td>
                         <td>{{ $product->grade }}</td>
-                        <td>{{ $product->condition }}</td>
-                        <td></td>
-                       <!-- <td>
-                            <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                                <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </td> -->
+                        <td>{{ $product->condition_details }}</td>
+                        <td>{{ $product->Counts }}</td>
+                   
                     </tr>
                     @endforeach
                 </table>
@@ -108,7 +101,6 @@
     </div>
  
    
-    {!! $products->links() !!}
     </div>        
 
 @endsection

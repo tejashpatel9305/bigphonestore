@@ -66,7 +66,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Condition:</strong>
-                <input type="text" name="condition" class="form-control" placeholder="Condition">
+                <input type="text" name="condition_details" class="form-control" placeholder="Condition">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

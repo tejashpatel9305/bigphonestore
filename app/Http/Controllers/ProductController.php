@@ -17,24 +17,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = product::latest()->paginate(1000);
-        //$products = DB::table('products')->select('make','model','colour','capacity','network','grade','condition', DB::raw('count(*) as count'))->groupBy('make')->get();
-        /*$products = [];
-        $columns = [
-            'make' => 'make',
-            'model' => 'model',
-            'colour' => 'colour',
-            'capacity' => 'capacity',
-            'network' => 'network',
-            'grade' => 'grade',
-            // put your other columns in this array
-        ];
-
-        foreach($columns as $name => $column)
-           $products[$name] = DB::table('products')->select($column, DB::raw('count(' . $column . ') as total'))->groupBy($column)->toSql();
-        */
+        //$products = product::latest()->paginate(1000);
+        $products = DB::table('products')->select(DB::raw('DISTINCT make,model,colour,capacity,network,grade, COUNT(*) AS Counts'),'condition_details')->groupBy('make','model','colour','capacity','network','grade','condition_details')->orderBy('Counts', 'desc')->get();
         return view('product.index',compact('products'))->with('i', (request()->input('page', 1) - 1) * 1000);
-
     }
 
     public function import(Request $request)
@@ -57,7 +42,7 @@ class ProductController extends Controller
                     'capacity' => $row['gb_spec_name'],
                     'network' => $row['network_name'],
                     'grade' => $row['grade_name'],
-                    'condition' => $row['condition_name'],
+                    'condition_details' => $row['condition_name'],
                 );
             }
         
@@ -82,7 +67,7 @@ class ProductController extends Controller
             })->get();
             if(!empty($data) && $data->count()){
                 foreach ($data as $key => $value) {
-                    $insert[] = ['make' => $value->make, 'model' => $value->model,'colour' => $value->colour, 'capacity' => $value->capacity, 'network' => $value->network, 'grade' => $value->grade, 'condition' => $value->condition];
+                    $insert[] = ['make' => $value->make, 'model' => $value->model,'colour' => $value->colour, 'capacity' => $value->capacity, 'network' => $value->network, 'grade' => $value->grade, 'condition_details' => $value->condition];
                 }
                 if(!empty($insert)){
                     DB::table('products')->insert($insert);

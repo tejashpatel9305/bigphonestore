@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('capacity', 40);
             $table->string('network', 30);
             $table->string('grade', 60);
-            $table->string('condition', 100);
+            $table->string('condition_details', 100);
             $table->timestamps();
         });
     }

@@ -28,7 +28,7 @@ class ProductImport implements ToModel,WithHeadingRow
             'capacity' => $row['gb_spec_name'],
             'network' => $row['network_name'],
             'grade' => $row['grade_name'],
-            'condition' => $row['condition_name'],
+            'condition_details' => $row['condition_name'],
 
         ]);
     }
